@@ -1,0 +1,29 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:
+  Udacity 3-1-16 - Challenge 1
+  AWS CloudFormation script that creates 2 Resources 
+  Resource 1 - AWS::EC2::SecurityGroup
+  Resource 2 - AWS::EC2::Instance
+
+Parameters:
+  # Parameters are entirely optional, but using them will make your
+  # cloudformation templates more reusable.  Use them for things that 
+  # may change over time, such as instance type, VPCs and so on.
+
+Resources:
+  udacity3-1-16-SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      - Key: Value
+  udacity3-1-16-Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      - Key: Value
+
+Outputs: 
+  # This is also optional.  Bonus points for useful outputs!
+  # For example, if you create a Load Balancer, it's nice to output the
+  # URL to it here, so that we don't have to go to the console to get it.
+...
