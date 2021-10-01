@@ -1,6 +1,6 @@
 # cloudformation-ec2-vpc
 
-AWS CloudFormation script that creates 2 Resources 
+AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an Apache Webserver
 
 ## Constraints
 
@@ -45,6 +45,11 @@ AWS CloudFormation script that creates 2 Resources
 * AWS CLI installed
 
 * AWS Default VPC with subnet created in account
+
+## How to use
+
+TBD
+
 
 ## Useful Links
 

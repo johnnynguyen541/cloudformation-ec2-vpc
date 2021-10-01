@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
 
-Description:
+Description: >
   Udacity 3-1-16 - Challenge 1
   AWS CloudFormation script that creates 2 Resources 
   Resource 1 - AWS::EC2::SecurityGroup
@@ -11,16 +11,43 @@ Parameters:
   # Parameters are entirely optional, but using them will make your
   # cloudformation templates more reusable.  Use them for things that 
   # may change over time, such as instance type, VPCs and so on.
+  VpcID:
+    Description: VPC used for our project
+    Type: String
+    Default: None
+
+  SubnetID: 
+    Description: Public Subnet ID used inside VPC
+    Type: String
+    Default: None
+
+  EC2InstanceAMIID:
+    Description: Amazon Machine Image (AMI) ID to be used on EC2 Instance
+    Type: String
+    Default: None
 
 Resources:
-  udacity3-1-16-SecurityGroup:
+  # Refer to Documentation
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
+  EC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      - Key: Value
-  udacity3-1-16-Instance:
+      GroupDescription: Inbound TCP port 80, unrestricted outbound
+      GroupName: Security Group
+      SecurityGroupEgress: 
+        - Egress
+      SecurityGroupIngress: 
+        - Ingress
+      Tags: 
+        - Tag
+      VpcId: String
+  # Refer to Documentation
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+  EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      - Key: Value
+      ImageId: !Ref EC2InstanceAMIID
+      InstanceType: t2.micro
 
 Outputs: 
   # This is also optional.  Bonus points for useful outputs!
