@@ -1,14 +1,18 @@
 [
 	{
-		"ParameterKey": "VpcID",
+		"ParameterKey": "EnvironmentName",
+		"ParameterValue": "U3-1-16"
+	},
+	{
+		"ParameterKey": "ParamVpcID",
 		"ParameterValue": "vpc-0534a9e313e873f76"
 	},
-  {
-		"ParameterKey": "SubnetID",
+	{
+		"ParameterKey": "ParamSubnetID",
 		"ParameterValue": "subnet-0b343132a597d78ba"
 	},
-  {
-		"ParameterKey": "EC2InstanceAMIID",
+	{
+		"ParameterKey": "ParamEC2InstanceAMIID",
 		"ParameterValue": "ami-0c2d06d50ce30b442"
 	}
 ]

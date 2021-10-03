@@ -11,17 +11,23 @@ Parameters:
   # Parameters are entirely optional, but using them will make your
   # cloudformation templates more reusable.  Use them for things that 
   # may change over time, such as instance type, VPCs and so on.
-  VpcID:
+
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names
+    Type: String
+    Default: Default Env Name
+
+  ParamVpcID:
     Description: VPC used for our project
     Type: String
     Default: None
 
-  SubnetID: 
+  ParamSubnetID: 
     Description: Public Subnet ID used inside VPC
     Type: String
     Default: None
 
-  EC2InstanceAMIID:
+  ParamEC2InstanceAMIID:
     Description: Amazon Machine Image (AMI) ID to be used on EC2 Instance
     Type: String
     Default: None
@@ -29,28 +35,55 @@ Parameters:
 Resources:
   # Refer to Documentation
   # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
+
   EC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Inbound TCP port 80, unrestricted outbound
       GroupName: Security Group
-      SecurityGroupEgress: 
-        - Egress
-      SecurityGroupIngress: 
-        - Ingress
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+      VpcId: !Ref ParamVpcID
       Tags: 
-        - Tag
-      VpcId: String
+        - Key: "Name"
+          Value: !Sub ${EnvironmentName} EC2 Security Group
   # Refer to Documentation
   # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: !Ref EC2InstanceAMIID
+      AssociatePublicIpAddress: true
+      ImageId: !Ref ParamEC2InstanceAMIID
       InstanceType: t2.micro
+      SubnetId: !Ref ParamSubnetID
+      SecurityGroupIds:
+        - !Ref EC2SecurityGroup
+      UserData:
+       Fn::Base64: !Sub |
+         #!/bin/bash
+         sudo yum update -y
+         sudo yum install -y httpd
+         sudo systemctl start httpd
+         sudo systemctl enable httpd
+      Tags:
+        - Key: "Name"
+          Value: !Sub ${EnvironmentName} EC2 Instance
 
 Outputs: 
   # This is also optional.  Bonus points for useful outputs!
   # For example, if you create a Load Balancer, it's nice to output the
   # URL to it here, so that we don't have to go to the console to get it.
+
+  EC2: 
+    Description: A reference to the created EC2Instance
+    Value: !Ref EC2Instance
+    Export:
+      Name: !Sub ${EnvironmentName}-EC2ID
 ...
