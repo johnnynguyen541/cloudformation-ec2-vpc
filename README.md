@@ -4,7 +4,7 @@ AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an
 
 ## Diagram
 
-![AWS CloudFormation - Draw.io Diagram](https://github.com/johnnynguyen541/cloudformation-ec2-vpc/docs/infrastructure-diagram.png?raw=true)
+![AWS CloudFormation - Draw.io Diagram](https://github.com/johnnynguyen541/cloudformation-ec2-vpc/blob/main/docs/infrastructure-diagram.png?raw=true)
 
 ## Constraints
 
