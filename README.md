@@ -2,6 +2,10 @@
 
 AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an Apache Webserver
 
+## Diagram
+
+![AWS CloudFormation - Draw.io Diagram](https://github.com/johnnynguyen541/cloudformation-ec2-vpc/docs/infrastructure-diagram.png?raw=true)
+
 ## Constraints
 
 **Resource 1 - AWS::EC2::SecurityGroup**
@@ -28,7 +32,9 @@ AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an
 
 ## Project Files
 
-`create.sh` - Shell script to run
+`docs/cli-example.txt` - CLI example
+
+`img` - Project Images
 
 `ec2-security-group-parameters.json` - Parameters for the Subnet, VPC and AMI
 
@@ -48,8 +54,23 @@ AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an
 
 ## How to use
 
-TBD
+See `cli-example.txt` for example run.
 
+To create stack:
+
+`./create.sh [STACK_NAME]] ec2-security-group.yml ec2-security-group-parameters.json`
+
+Check Status:
+
+`aws cloudformation describe-stacks --stack-name [STACK_NAME]`
+
+Access port 80 using http:
+
+`curl http://[EC2-PUBLIC-IP]`
+
+Delete Stack:
+
+`aws cloudformation delete-stack --stack-name ec2-sec-stack`
 
 ## Useful Links
 

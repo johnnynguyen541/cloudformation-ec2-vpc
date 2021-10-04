@@ -1,0 +1,63 @@
+# Create Stack ec2-sec-stack
+$ ./create.sh ec2-sec-stack ec2-security-group.yml ec2-security-group-parameters.json 
+    StackId: arn:aws:cloudformation:us-west-2:268145795447:stack/ec2-sec-stack/8bf80580-2425-11ec-9d53-06b558ffe939
+
+# Describe Stack ec2-sec-stack -- CREATE_IN_PROGRESS
+$ aws cloudformation describe-stacks --stack-name ec2-sec-stack
+    Stacks:
+    ...
+    StackName: ec2-sec-stack
+    StackStatus: CREATE_IN_PROGRESS
+    Tags: []
+
+# Describe Stack ec2-sec-stack -- CREATE_COMPLETE
+$ aws cloudformation describe-stacks --stack-name ec2-sec-stack
+    Stacks:
+    ...
+    StackName: ec2-sec-stack
+    StackStatus: CREATE_COMPLETE
+    Tags: []
+
+# Describe EC2 Instance
+$ aws ec2 describe-instance-status
+    InstanceStatuses:
+    - AvailabilityZone: us-west-2a
+    InstanceId: i-0034549df3b596bcb
+    InstanceState:
+        Code: 16
+        Name: running
+    InstanceStatus:
+        Details:
+        - Name: reachability
+        Status: passed
+        Status: ok
+    SystemStatus:
+        Details:
+        - Name: reachability
+        Status: passed
+        Status: ok
+
+# Curl Webserver port 80 (HTTP - Should be enabled)
+$ curl http://54.203.11.179/
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+        <head>
+            <title>Test Page for the Apache HTTP Server</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <style type="text/css">
+
+# DELETE Stack
+$ aws cloudformation delete-stack --stack-name ec2-sec-stack
+
+# DELETE In progress
+$ aws cloudformation describe-stacks --stack-name ec2-sec-stack
+    Stacks:
+    ...
+    StackStatus: DELETE_IN_PROGRESS
+    Tags: []
+
+# DELETE Complete
+$ aws cloudformation describe-stacks --stack-name ec2-sec-stack
+
+    An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id ec2-sec-stack does not exist

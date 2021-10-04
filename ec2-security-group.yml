@@ -59,12 +59,14 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      AssociatePublicIpAddress: true
       ImageId: !Ref ParamEC2InstanceAMIID
       InstanceType: t2.micro
-      SubnetId: !Ref ParamSubnetID
-      SecurityGroupIds:
-        - !Ref EC2SecurityGroup
+      NetworkInterfaces: 
+      - AssociatePublicIpAddress: "true"
+        DeviceIndex: "0"
+        GroupSet: 
+          - !Ref EC2SecurityGroup
+        SubnetId: !Ref ParamSubnetID
       UserData:
        Fn::Base64: !Sub |
          #!/bin/bash
