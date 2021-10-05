@@ -36,6 +36,8 @@ AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an
 
 `img` - Project Images
 
+`create.sh` - Create AWS CloudFormation Stack
+
 `ec2-security-group-parameters.json` - Parameters for the Subnet, VPC and AMI
 
 `ec2-security-group.yml` - AWS CloudFormation IaC Code
@@ -43,6 +45,8 @@ AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an
 `LICENSE` - License
 
 `README.md` - README file with instructions
+
+`update.sh` - Update AWS CloudFormation Stack
 
 ## Requirements
 
