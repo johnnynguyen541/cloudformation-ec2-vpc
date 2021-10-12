@@ -3,6 +3,7 @@
 #############################################################################
 # Function: Check_Kwargs_Count
 #   Checks correct number of kwargs
+#
 # Globals:
 #   args_count=${#}
 #   
@@ -11,21 +12,20 @@
 #   1 if incorrect count
 #############################################################################
 Check_Kwargs_Count () {
-  args_count=${#}
+  args_count=$1
 
-  if [ ${args_count} -eq 4 ]
+  if [ ${args_count} -eq 3 ]
   then
     printf "Correct number of parameters\n"
-    return 0
   else
     printf "Incorrect number of parameters\n"
     printf "Usage: ./update.sh [STACK_NAME] [TEMPLATE_FILE] [PARAMETERS_FILE]\n"
-    return 1
+    exit 1
   fi
 }
 
 # Script Start
-Check_Kwargs_Count
+Check_Kwargs_Count $#
 
 aws cloudformation update-stack \
 --stack-name $1 \

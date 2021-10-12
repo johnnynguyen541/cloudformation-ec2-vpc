@@ -60,7 +60,7 @@ AWS CloudFormation script that creates SecurityGroup and an EC2 Instance with an
 
 See `cli-example.txt` for example run.
 
-To create stack:
+To Create Stack:
 
 `./create.sh [STACK_NAME]] ec2-security-group.yml ec2-security-group-parameters.json`
 
@@ -68,13 +68,17 @@ Check Status:
 
 `aws cloudformation describe-stacks --stack-name [STACK_NAME]`
 
+To Update Stack:
+
+`./create.sh [STACK_NAME]] ec2-security-group.yml ec2-security-group-parameters.json`
+
 Access port 80 using http:
 
 `curl http://[EC2-PUBLIC-IP]`
 
 Delete Stack:
 
-`aws cloudformation delete-stack --stack-name ec2-sec-stack`
+`aws cloudformation delete-stack --stack-name [STACK_NAME]`
 
 ## Useful Links
 
